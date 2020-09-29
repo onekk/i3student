@@ -56,7 +56,7 @@ from motors import nema17
 import hw
 importlib.reload(hw)
 
-from hw import telaio
+from hw import telaio, m_mount
 
 
 def activate_doc():
@@ -144,10 +144,17 @@ tel_width = 20
 
 motor_offset = (tel_w - tel_width) * 0.5
 
+z_mount_th = 6
+
 mot1.Placement = FreeCAD.Placement(Vector(motor_offset *-1,-35,0), ROT0)
 mot2.Placement = FreeCAD.Placement(Vector(motor_offset,-35,0), ROT0)
 
 mounting = telaio(DOC, "telaio", tel_h, tel_w, tel_th, tel_width)
 
+m_mot_zsx = m_mount(DOC, "mount_zsx", z_mount_th, 0)
+m_mot_zdx = m_mount(DOC, "mount_zdx", z_mount_th, 0)
+
+m_mot_zsx.Placement = FreeCAD.Placement(Vector(motor_offset *-1,-35, z_mount_th), ROT0)
+m_mot_zdx.Placement = FreeCAD.Placement(Vector(motor_offset,-35, z_mount_th), ROT0)
 
 setview()
